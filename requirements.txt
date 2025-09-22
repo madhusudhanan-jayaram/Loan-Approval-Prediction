@@ -1,0 +1,15 @@
+About Company
+
+Retail lender offering home loans across regions.
+
+Problem Statement
+
+Automate real-time loan eligibility from application data and segment customers for targeting.
+
+Inputs (generic)
+
+Demographics, income, dependents, loan details, credit history.
+
+Outputs
+
+Eligibility (Y/N), approval probability score, customer segment.
