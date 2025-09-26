@@ -6,6 +6,7 @@ os.makedirs("runs", exist_ok=True)
 NOTEBOOKS = [
     ("notebooks/01_data_collection.ipynb", "runs/01_data_collection_out.ipynb"),
     ("notebooks/02_preprocessing.ipynb",   "runs/02_preprocessing_out.ipynb"),
+    ("notebooks/03_eda_univariate_bivariate.ipynb",  "runs/03_eda_univariate_bivariate.ipynb"),
 ]
 
 for src, dst in NOTEBOOKS:

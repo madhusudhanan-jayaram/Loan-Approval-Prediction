@@ -12,4 +12,4 @@ ARTIFACTS_DIR = ROOT / "artifacts"
 CSV_PATH = DATA_DIR / "loan_data_set.csv"   # adjust if needed
 RAW_PARQUET = ARTIFACTS_DIR / "01_raw.parquet"
 CLEAN_PARQUET = ARTIFACTS_DIR / "02_clean.parquet"
-SELECTED_JSON = ARTIFACTS_DIR / "03_selected_features.json"
+ENCODED_PARQUET = ARTIFACTS_DIR / "03_encoded.parquet"

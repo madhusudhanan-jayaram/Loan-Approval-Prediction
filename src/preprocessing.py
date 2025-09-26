@@ -44,3 +44,4 @@ def clean_data(df: pd.DataFrame):
     X_train, X_test, y_train, y_test, sc = split_scalar(X, y)
 
     return df_clean, df_enc, X_train, X_test, y_train, y_test, sc
+
