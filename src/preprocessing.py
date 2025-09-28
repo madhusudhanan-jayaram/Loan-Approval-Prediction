@@ -10,38 +10,42 @@ def handle_missing(df: pd.DataFrame) -> pd.DataFrame:
             df[col] = df[col].fillna(df[col].median())
     return df
 
-def split_scalar(indep_X, dep_Y):
-    X_train, X_test, y_train, y_test = train_test_split(
-        indep_X, dep_Y, test_size=0.25, random_state=0, stratify=dep_Y
-    )
-    sc = StandardScaler()
-    X_train = sc.fit_transform(X_train)
-    X_test  = sc.transform(X_test)
-    return X_train, X_test, y_train, y_test, sc
+
+def convert_dependents(df: pd.DataFrame, col: str = "Dependents") -> pd.DataFrame:
+    if col in df.columns:
+        df[col] = (
+            df[col]
+            .astype(str)
+            .str.replace("+", "", regex=False)
+            .astype(float)
+        )
+    return df
 
 def clean_data(df: pd.DataFrame):
-    # 1. Drop Loan_ID
+    # 1) Drop id if present
     if "Loan_ID" in df.columns:
         df = df.drop("Loan_ID", axis=1)
 
-    # 2. Missing values
-    df_clean = handle_missing(df)   # keep clean version
+    # 2) Clean + normalize Dependents
+    df_clean = handle_missing(df)
+    df_clean = convert_dependents(df_clean)
 
-    # --- Extract target BEFORE encoding ---
-    if "Loan_Status" not in df_clean.columns:
-        raise KeyError("Loan_Status column is missing in input data.")
-    y = df_clean["Loan_Status"]
-    if y.dtype == "object":
-        y = y.astype(str).str.strip().map({"Y": 1, "N": 0})
+    df_clean = pd.get_dummies(df, drop_first=True)
 
-    # 3. Encode only features
-    X = df_clean.drop(columns=["Loan_Status"])
-    X = pd.get_dummies(X, drop_first=True)
-    df_enc = X.copy()
-    df_enc["Loan_Status"] = y   # keep target in encoded DF for inspection
+    print("After dummies:", df_clean.shape)
+    print("New columns:", df_clean.columns.tolist())  # show last 10 columns
+    indep_X = df_clean.drop('Loan_Status_Y', axis=1)
+    dep_Y = df_clean['Loan_Status_Y']
+    # Print shapes
+    print("Shape of full dataset:", df_clean.shape)
+    print("Shape of Features (indep_X):", indep_X.shape)
+    print("Shape of Target (dep_Y):", dep_Y.shape)
 
-    # 4. Split + scale
-    X_train, X_test, y_train, y_test, sc = split_scalar(X, y)
+    # Print first few rows of features
+    print("\nIndependent Variables (X):")
+    print(indep_X.head())
 
-    return df_clean, df_enc, X_train, X_test, y_train, y_test, sc
-
+    # Print first few rows of target
+    print("\nDependent Variable (y):")
+    print(dep_Y.head())
+    return df_clean
