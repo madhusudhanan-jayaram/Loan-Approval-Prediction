@@ -8,6 +8,7 @@ NOTEBOOKS = [
     ("notebooks/02_preprocessing.ipynb",   "runs/02_preprocessing_out.ipynb"),
     ("notebooks/03_eda_univariate_bivariate.ipynb",  "runs/03_eda_univariate_bivariate.ipynb"),
     ("notebooks/04_feature_selection.ipynb",  "runs/04_feature_selection.ipynb"),
+    ("notebooks/05_model_baseline_and_evaluation.ipynb",  "runs/05_model_baseline_and_evaluation.ipynb"),
 ]
 
 for src, dst in NOTEBOOKS:
