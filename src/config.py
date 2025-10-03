@@ -18,3 +18,4 @@ X_TEST_PARQUET = ARTIFACTS_DIR / "02_X_test.parquet"
 Y_TRAIN_PARQUET = ARTIFACTS_DIR / "02_y_train.parquet"
 Y_TEST_PARQUET = ARTIFACTS_DIR / "02_y_test.parquet"
 
+PRODUCTION_MODEL = ARTIFACTS_DIR / "production_model.pkl"
