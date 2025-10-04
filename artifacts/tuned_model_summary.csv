@@ -1,0 +1,4 @@
+Model,Accuracy,F1,Best Params
+Logistic Regression,0.8617886178861789,0.9081081081081082,"{'logisticregression__C': 0.01, 'logisticregression__class_weight': None}"
+SVM (Linear),0.8536585365853658,0.9032258064516129,"{'svc__C': 0.01, 'svc__class_weight': None}"
+Naive Bayes,0.8455284552845529,0.8961748633879781,{'var_smoothing': 1e-09}
